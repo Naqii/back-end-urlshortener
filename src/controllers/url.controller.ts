@@ -34,16 +34,24 @@ export default {
   },
   async getOriginalUrl(req: Request, res: Response) {
     try {
-      const { originalUrl, customAlias } = req.params;
+      const { customAlias } = req.params;
 
+      // Find the entry by customAlias
       const entry = await UrlModel.findOne({ customAlias });
-      if (!entry) response.error(res, error, 'Alias not found');
-      
+      if (!entry) {
+        response.error(res, error, 'Alias not found');
+        return;
+      }
+
+      // Get the original URL
+      const originalUrl = entry.originalUrl;
       if (typeof originalUrl === 'string') {
         res.redirect(originalUrl);
-      };
+      } else {
+        response.error(res, error, 'Url not found')
+      }
     } catch (error) {
-        response.error(res, error, 'Failed to create new Url');
+      response.error(res, error, 'Failed to get original Url');
     }
   },
 };
