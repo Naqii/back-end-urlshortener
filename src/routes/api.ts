@@ -1,8 +1,8 @@
 import express from 'express';
-import dummyController from '../controllers/dummy.controllers';
+import urlController from '../controllers/url.controller';
 
 const router = express.Router();
 
-router.get('/dummy', dummyController.dummy);
+router.post('/shorten', urlController.createShortUrl);
 
 export default router;
