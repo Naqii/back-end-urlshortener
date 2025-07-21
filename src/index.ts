@@ -19,7 +19,7 @@ async function init() {
     app.use(express.json());
 
     //ditampilkan dihalaman utama
-    app.get('/', (req, res) => {
+    app.get('/test', (req, res) => {
       res.status(200).json({
         message: 'Server is Running',
         data: null,
