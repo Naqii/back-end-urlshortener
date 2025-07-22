@@ -26,7 +26,7 @@ async function init() {
       });
     });
 
-    app.use('/', urlRouter);
+    app.use('/url', urlRouter);
 
     app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);

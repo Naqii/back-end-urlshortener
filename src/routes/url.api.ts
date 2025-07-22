@@ -1,9 +1,9 @@
 import express from 'express';
 import urlController from '../controllers/url.controller';
 
-const router = express.Router();
+const url = express.Router();
 
-router.post('/shorten', urlController.createShortUrl);
-router.get('/:customAlias', urlController.redirectOriginalUrl);
+url.post('/shorten', urlController.createShortUrl);
+url.get('/:customAlias', urlController.redirectOriginalUrl);
 
-export default router;
+export default url;
