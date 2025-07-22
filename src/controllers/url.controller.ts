@@ -37,18 +37,18 @@ export default {
       const { customAlias } = req.params;
 
       // Find the entry by customAlias
-      const entry = await UrlModel.findOne({ customAlias });
-      if (!entry) {
-        response.error(res, error, 'Alias not found');
+      const alias = await UrlModel.findOne({ customAlias });
+      if (!alias) {
+        response.error(res, error, 'customAlias not found');
         return;
       }
 
       // Get the original URL
-      const originalUrl = entry.originalUrl;
+      const originalUrl = alias.originalUrl;
       if (typeof originalUrl === 'string') {
         res.redirect(originalUrl);
       } else {
-        response.error(res, error, 'Url not found')
+        res.status(404).json({ error: 'URL not found' });
       }
     } catch (error) {
       response.error(res, error, 'Failed to get original Url');
