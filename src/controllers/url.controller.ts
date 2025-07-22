@@ -38,10 +38,10 @@ export default {
 
       // Find the entry by customAlias
       const alias = await UrlModel.findOne({ customAlias });
-      // if (!alias) {
-      //   response.error(res, error, 'customAlias not found');
-      //   return;
-      // }
+      if (!alias) {
+        response.error(res, error, 'customAlias not found');
+        return;
+      }
 
       // Get the original URL
       const originalUrl = alias.originalUrl;
