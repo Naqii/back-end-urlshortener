@@ -3,9 +3,16 @@ import * as Yup from 'yup';
 
 export const URL_MODEL_SHORTENER = 'Url';
 
+const validateCustomAlias = Yup.string()
+  .matches(
+    /^[a-zA-Z0-9 _]+$/,
+    'Custom alias must only contain letters and numbers'
+  )
+  .optional();
+
 export const urlDTO = Yup.object({
   originalUrl: Yup.string().required(),
-  customAlias: Yup.string(),
+  customAlias: validateCustomAlias,
   newUrl: Yup.string(),
 });
 

@@ -4,6 +4,7 @@ import { isValidUrl } from '../utils/validatorUrl';
 import UrlModel, { urlDTO } from '../models/url.model';
 import { BASE_URL } from '../utils/env';
 import { error } from 'console';
+import { formatInputAlias } from '../utils/formatAlias';
 
 export default {
   async createShortUrl(req: Request, res: Response) {
@@ -15,19 +16,23 @@ export default {
         return;
       }
 
-      const exists = await UrlModel.findOne({ customAlias });
+      await urlDTO.validate(req.body);
 
+      const formattedAlias = formatInputAlias(customAlias);
+
+      const exists = await UrlModel.findOne({ customAlias: formattedAlias });
       if (exists) {
         response.error(res, error, 'Alias alredy taken');
         return;
       }
 
-      await urlDTO.validate(req.body);
-      const newUrl = `${BASE_URL}/${customAlias}`;
+      const newUrl = `${BASE_URL}/${formattedAlias}`;
       const urlData = {
         ...req.body,
+        customAlias: formattedAlias,
         newUrl,
       };
+
       const result = await UrlModel.create(urlData);
       response.success(res, result, 'Success to create new Url');
     } catch (error) {
