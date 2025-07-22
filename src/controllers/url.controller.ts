@@ -23,16 +23,19 @@ export default {
       }
 
       await urlDTO.validate(req.body);
-      const result = await UrlModel.create({
+      const newUrl = `${BASE_URL}/${customAlias}`;
+      const urlData = {
         ...req.body,
-        newUrl: `${BASE_URL}/${customAlias}`,
-      });
+        newUrl,
+      };
+      const result = await UrlModel.create(urlData);
       response.success(res, result, 'Success to create new Url');
     } catch (error) {
       response.error(res, error, 'Failed to create new Url');
     }
   },
-  async getOriginalUrl(req: Request, res: Response) {
+
+  async redirectOriginalUrl(req: Request, res: Response) {
     try {
       const { customAlias } = req.params;
 
