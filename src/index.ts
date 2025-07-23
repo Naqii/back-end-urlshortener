@@ -1,8 +1,9 @@
 import express from 'express';
-import urlRouter from './routes/url.api';
+import urlRouter from './routes/url';
 import cors from 'cors';
 import db from './utils/database';
 import mongoose from 'mongoose';
+import docs from './docs/url.route';
 
 async function init() {
   try {
@@ -12,11 +13,10 @@ async function init() {
 
     const app = express();
 
-    const PORT = 4000;
-
-    app.use(cors());
+    const PORT = 3000;
 
     app.use(express.json());
+    app.use(cors());
 
     //ditampilkan dihalaman utama
     app.get('/', (req, res) => {
@@ -27,6 +27,7 @@ async function init() {
     });
 
     app.use('/url', urlRouter);
+    docs(app);
 
     app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
