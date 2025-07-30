@@ -8,11 +8,11 @@ const doc = {
   },
   servers: [
     {
-      url: 'http://localhost:4000/url',
+      url: 'http://localhost:3000',
       description: 'Local Server',
     },
     {
-      url: 'https://back-end-urlshortener.vercel.app/url',
+      url: 'https://byhq.in',
       description: 'Deploy Server',
     },
   ],

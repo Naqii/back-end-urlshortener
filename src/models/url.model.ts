@@ -5,7 +5,7 @@ export const URL_MODEL_SHORTENER = 'Url';
 
 const validateCustomAlias = Yup.string()
   .matches(
-    /^[a-zA-Z0-9 _]+$/,
+    /^[a-zA-Z0-9 _-]+$/,
     'Custom alias must only contain letters and numbers'
   )
   .optional();

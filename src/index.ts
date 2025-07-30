@@ -13,24 +13,24 @@ async function init() {
 
     const app = express();
 
-    const PORT = 4000;
+    const PORT = 3000;
 
     app.use(express.json());
     app.use(cors());
 
     //ditampilkan dihalaman utama
-    app.get('/', (req, res) => {
+    app.get('/server', (req, res) => {
       res.status(200).json({
         message: 'Server is Running',
         data: null,
       });
     });
 
-    app.use('/url', urlRouter);
+    app.use('/', urlRouter);
     docs(app);
 
     app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
+      console.log(`Server running on http://localhost:${PORT}/server`);
     });
   } catch (error) {
     console.log(error);
