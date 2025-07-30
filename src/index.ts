@@ -19,7 +19,7 @@ async function init() {
     app.use(cors());
 
     //ditampilkan dihalaman utama
-    app.get('/server', (req, res) => {
+    app.get('/', (req, res) => {
       res.status(200).json({
         message: 'Server is Running',
         data: null,
@@ -30,7 +30,7 @@ async function init() {
     docs(app);
 
     app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}/server`);
+      console.log(`Server running on http://localhost:${PORT}`);
     });
   } catch (error) {
     console.log(error);
