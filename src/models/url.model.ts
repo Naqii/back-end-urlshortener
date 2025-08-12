@@ -14,6 +14,7 @@ export const urlDTO = Yup.object({
   originalUrl: Yup.string().required(),
   customAlias: validateCustomAlias,
   newUrl: Yup.string(),
+  isActive: Yup.boolean(),
 });
 
 export type TypeUrl = Yup.InferType<typeof urlDTO>;
@@ -32,6 +33,10 @@ const UrlSchema = new Schema<Url>(
     newUrl: {
       type: Schema.Types.String,
     },
+    isActive: {
+      type: Schema.Types.Boolean,
+      default: true,
+    }
   },
   {
     timestamps: true,
